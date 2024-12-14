@@ -10,6 +10,7 @@ import { authentication } from "./utils/auth.js";
 const server = new ApolloServer({
   typeDefs: [UserTypeDefs, PostTypeDefs, FollowTypeDefs],
   resolvers: [UserResolvers, PostResolvers, FollowResolvers],
+  introspection: true, // Menambahkan introspection
 });
 
 // Passing an ApolloServer instance to the `startStandaloneServer` function:
@@ -17,7 +18,7 @@ const server = new ApolloServer({
 //  2. installs your ApolloServer instance as middleware
 //  3. prepares your app to handle incoming requests
 const { url } = await startStandaloneServer(server, {
-  listen: { port: 4000 },
+  listen: { port: process.env.PORT || 4000 },
   context: async ({ req, res }) => {
     return {
       doAuth: async () => await authentication(req),
