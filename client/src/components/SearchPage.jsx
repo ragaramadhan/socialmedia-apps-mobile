@@ -12,15 +12,17 @@ export default function SearchPage() {
   const navigation = useNavigation();
   const [searchUser, { data }] = useLazyQuery(Search_User);
   const [follow, {}] = useMutation(DO_FOLLOW, {
-    onCompleted: () => {
-      SetTemp("");
+    onCompleted: (_, { variables }) => {
+      const userId = variables?.followingId;
+      navigation.navigate("UserDetail", { userId });
+      // SetTemp("");
     },
     refetchQueries: [
       {
         query: PROFIL_DETAIL,
       },
     ],
-    awaitRefetchQueries: true,
+    // awaitRefetchQueries: true,
   });
   async function handleCek() {
     const response = await searchUser({
@@ -43,8 +45,6 @@ export default function SearchPage() {
         followingId: userId,
       },
     });
-
-    navigation.navigate("UserDetail", { userId });
   }
 
   return (
