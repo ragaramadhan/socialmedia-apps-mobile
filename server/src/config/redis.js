@@ -1,5 +1,5 @@
 import Redis from "ioredis";
-
+// tambahan sedikit
 // ? default: localhost:6379
 // ? Bila ingin tembak ke connection remote
 // ? Gunakan Object
