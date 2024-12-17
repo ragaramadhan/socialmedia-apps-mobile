@@ -10,7 +10,7 @@ import Redis from "ioredis";
     username: "default", // needs Redis >= 6
     password: "my-top-secret",
     db: 0, // Defaults to 0
-  }
+  } ss
  */
 const redis = new Redis({
   port: 12630, // Redis port
